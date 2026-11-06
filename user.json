@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "user",
+      "value": "edgewords",
+      "domain": "www.edgewordstraining.co.uk",
+      "path": "/",
+      "expires": 1793978826.52132,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

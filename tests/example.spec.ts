@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from './globalbeforeafter';
 
 test('has title', async function({ page }) { //Altered to use "full function syntax" - has no benifit here so just use default arrow syntax: =>
   await page.goto('https://playwright.dev/'); //async + await is important to allow a step to complete in browser *before* executing next step
