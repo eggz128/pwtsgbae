@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-
+import { TestOptions } from './tests/my-test';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -11,7 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export default defineConfig<TestOptions>({
   testDir: './tests',
   expect: {timeout: 3000},
   timeout: 20 * 1000,
@@ -24,7 +24,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['html'],
+    ['json', { outputFile: 'json-results/testresults.json'} ],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -36,13 +39,18 @@ export default defineConfig({
     headless: true,
     //launchOptions: {slowMo: 500},
     //actionTimeout: 5000,
+    screenshot: 'on',
+
+    
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'],
+        person: 'Bob',
+       },
       default: false,
     },
 
@@ -51,6 +59,7 @@ export default defineConfig({
       use: { ...devices['Desktop Firefox'],
         //viewport: { width: 320, height: 200 },
         //headless: true,
+        person: 'Alice'
       },
       
       
@@ -58,7 +67,9 @@ export default defineConfig({
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices['Desktop Safari'],
+        person: 'John'
+       },
       default: false,
       //retries: 2,
     },
@@ -67,7 +78,7 @@ export default defineConfig({
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 7'],
-        viewport: { width: 300, height: 200}  ,
+        viewport: { width: 600, height: 400}  ,
            },
     },
     {

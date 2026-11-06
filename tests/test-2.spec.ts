@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+test.describe.configure({mode: 'serial'})
+
+
 test('test', async ({ page }) => {
   await page.goto('https://www.edgewordstraining.co.uk/demo-site/');
   await page.locator('#menu-main').getByRole('link', { name: 'My account' }).click(); //Chaining - find the menu (.) inside the menu find the link (.) do a click()

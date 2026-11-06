@@ -73,7 +73,9 @@ test.describe('A group of tests', () => {
 
     test('Capture order number @Smoke', async ({ page, browserName }) => {
       //test.fail(); //This makes a failing test report pass
+      //test.skip('A description of why'); //PW 1.65+ 
       test.skip(browserName === 'webkit', "Don't run on safari");
+      
       //test.abort(); //Stop and fail here
       test.slow(); //Triples the test timeout - this is a slow test
 

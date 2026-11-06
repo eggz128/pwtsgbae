@@ -181,7 +181,7 @@ test('Capturing Text', async ({ page }) => {
   await expect(page).toHaveTitle("Forms", { timeout: 5000 }) //Override global config with a custom expect timeout
 });
 
-test('Generic methods', async ({ page }) => {
+test('Generic methods', {lock: 'cart'}, async ({ page }) => {
   //A comment
   await page.goto("https://www.edgewordstraining.co.uk/webdriver2/docs/forms.html")
 
